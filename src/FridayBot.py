@@ -20,6 +20,12 @@ def get_inspiring_quote():
   quote = json_data[0]['q'] + " -" + json_data[0]['a']
   return(quote)
 
+def get_random_fact():
+  response = requests.get("https://uselessfacts.jsph.pl/random.json?language=en")
+  json_data = json.loads(response.text)
+  facts = json_data['text']
+  return(facts)
+
 
 @client.event
 async def on_ready():
@@ -36,6 +42,10 @@ async def on_message(message):
 
     if message.content.startswith('$catfacts'):
         quote = get_cat_facts()
+        await message.channel.send(quote)
+
+    if message.content.startswith('$randomfacts'):
+        quote = get_random_fact()
         await message.channel.send(quote)
 
 client.run(os.getenv('TOKEN'))
