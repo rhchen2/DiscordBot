@@ -6,7 +6,7 @@ import json
 from dotenv import load_dotenv
 
 client = discord.Client()
-load_dotenv(".env")
+load_dotenv("src/config/.env")
 
 def get_cat_facts():
   response = requests.get("https://meowfacts.herokuapp.com/")
