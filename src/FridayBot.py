@@ -4,6 +4,7 @@ import requests
 import json
 
 from dotenv import load_dotenv
+from manga.manga_controller import manga_main
 
 client = discord.Client()
 load_dotenv("src/config/.env")
@@ -47,5 +48,9 @@ async def on_message(message):
     if message.content.startswith('$randomfacts'):
         quote = get_random_fact()
         await message.channel.send(quote)
+
+    if message.content.startswith('$manga'):
+        msg = manga_main(message)
+        await message.channel.send(msg)
 
 client.run(os.getenv('TOKEN'))
