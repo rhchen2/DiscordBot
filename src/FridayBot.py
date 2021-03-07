@@ -7,9 +7,10 @@ from dotenv import load_dotenv
 from manga.manga_controller import manga_main
 
 client = discord.Client()
-load_dotenv("src/config/.env")
-GUILD = os.getenv('DISCORD_GUILD')
+load_dotenv("config/.env")
 TOKEN = os.getenv('DISCORD_TOKEN')
+
+print(TOKEN)
 
 def get_cat_facts():
   response = requests.get("https://meowfacts.herokuapp.com/")
@@ -32,11 +33,7 @@ def get_random_fact():
 
 @client.event
 async def on_ready():
-    guild = discord.utils.get(client.guilds, name=GUILD)
-    print(
-        f'{client.user} is connected to the following guild:\n'
-        f'{guild.name}(id: {guild.id})'
-        )
+    print('We have logged in as {0.user}'.format(client))
 
 @client.event
 async def on_message(message):
@@ -56,7 +53,7 @@ async def on_message(message):
         await message.channel.send(quote)
 
     if message.content.startswith('$manga'):
-        msg = manga_main(message)
+        msg = manga_main(message.content)
         await message.channel.send(msg)
 
-client.run(os.getenv('TOKEN'))
+client.run(TOKEN)
