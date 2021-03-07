@@ -48,6 +48,8 @@ def get_mangas():
 
 def register_manga(url):
     title = get_manga_title(url)
+    if len(title) < 1:
+        return "No title found for {0}".format(url)
     manga[title] = url
     save_manga()
     return "Manga '{0}' Registered".format(title)
