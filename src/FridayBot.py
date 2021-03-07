@@ -7,7 +7,8 @@ from dotenv import load_dotenv
 from manga.manga_controller import manga_main
 
 client = discord.Client()
-load_dotenv("src/config/.env")
+load_dotenv("config/.env")
+TOKEN = os.getenv('DISCORD_TOKEN')
 
 def get_cat_facts():
   response = requests.get("https://meowfacts.herokuapp.com/")
@@ -53,4 +54,4 @@ async def on_message(message):
         msg = manga_main(message.content)
         await message.channel.send(msg)
 
-client.run(os.getenv('TOKEN'))
+client.run(TOKEN)
