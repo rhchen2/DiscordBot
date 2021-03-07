@@ -1,33 +1,14 @@
 import discord
 import os
 import requests
-import json
 
 from dotenv import load_dotenv
 from manga.manga_controller import manga_main
+from randomFeatures.randomHelpers import *
 
 client = discord.Client()
 load_dotenv("config/.env")
 TOKEN = os.getenv('DISCORD_TOKEN')
-
-def get_cat_facts():
-  response = requests.get("https://meowfacts.herokuapp.com/")
-  json_data = json.loads(response.text)
-  facts = json_data['data']
-  return(facts)
-
-def get_inspiring_quote():
-  response = requests.get("https://zenquotes.io/api/random")
-  json_data = json.loads(response.text)
-  quote = json_data[0]['q'] + " -" + json_data[0]['a']
-  return(quote)
-
-def get_random_fact():
-  response = requests.get("https://uselessfacts.jsph.pl/random.json?language=en")
-  json_data = json.loads(response.text)
-  facts = json_data['text']
-  return(facts)
-
 
 @client.event
 async def on_ready():
@@ -51,7 +32,7 @@ async def on_message(message):
         await message.channel.send(quote)
 
     if message.content.startswith('$manga'):
-        msg = manga_main(message.content)
+        msg = random/manga_main(message.content)
         await message.channel.send(msg)
 
 client.run(TOKEN)
