@@ -50,7 +50,7 @@ async def on_message(message):
         await message.channel.send(quote)
 
     if message.content.startswith('$manga'):
-        msg = manga_main(message)
+        msg = manga_main(message.content)
         await message.channel.send(msg)
 
 client.run(os.getenv('TOKEN'))

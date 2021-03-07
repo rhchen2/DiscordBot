@@ -25,10 +25,9 @@ def get_manga_title(url):
 
     soup = BeautifulSoup(page.content, 'html.parser')
 
-    list_items = soup.find_all("li")
-    item = list_items[0]
-    link = item.find_all("a")[0]
-    return link['title'][:link['title'].index(' Chapter')]
+    list_items = soup.find_all("title")
+    title = list_items[0].get_text()
+    return title[:title.index(' Manga')]
 
 def get_chapter_link(url):
     page = requests.get(url)
