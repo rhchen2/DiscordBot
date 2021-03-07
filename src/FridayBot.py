@@ -10,8 +10,6 @@ client = discord.Client()
 load_dotenv("config/.env")
 TOKEN = os.getenv('DISCORD_TOKEN')
 
-print(TOKEN)
-
 def get_cat_facts():
   response = requests.get("https://meowfacts.herokuapp.com/")
   json_data = json.loads(response.text)
