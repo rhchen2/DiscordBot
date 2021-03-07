@@ -32,7 +32,7 @@ async def on_message(message):
         await message.channel.send(quote)
 
     if message.content.startswith('$manga'):
-        msg = random/manga_main(message.content)
+        msg = manga_main(message.content)
         await message.channel.send(msg)
 
 client.run(TOKEN)
